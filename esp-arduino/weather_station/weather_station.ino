@@ -26,7 +26,7 @@ void setup(void)
   Wire.begin();
 
   //Start RTC
-  rtc.begin();
+/*  rtc.begin();
 
   if (rtc.lostPower()) {
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
@@ -42,13 +42,13 @@ void setup(void)
     delay(300);
   }
   Serial.println("Connected with IP: ");
-  Serial.print(WiFi.localIP());
+  Serial.print(WiFi.localIP());*/
 
   // Init Firebase connection
-  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
+/*/  Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
   Firebase.reconnectWiFi(true);
   Firebase.enableClassicRequest(firebaseData, true);
-
+*/
   // Start BME5680 sensor
   sensor.begin(BME680_I2C_ADDR_SECONDARY, Wire);
   checkIaqSensorStatus();
@@ -71,20 +71,26 @@ void setup(void)
   checkIaqSensorStatus();
 
   // Get data from BME680
-  if (sensor.run()) {
+ /* if (sensor.run()) {
+    updateSensor();
+  } else {
+    checkIaqSensorStatus();
+  }*/
+
+  // Sleep for set time
+ // Serial.println("Go sleep");
+  //ESP.deepSleep(30e6);
+}
+
+void loop(void)
+{
+    if (sensor.run()) {
     updateSensor();
   } else {
     checkIaqSensorStatus();
   }
 
-  // Sleep for set time
-  Serial.println("Go sleep");
-  ESP.deepSleep(30e6);
-}
-
-void loop(void)
-{
-   
+  delay(5000);
 }
 
 void checkIaqSensorStatus(void)
@@ -112,10 +118,10 @@ void checkIaqSensorStatus(void)
 
 void updateSensor(void)
 {
-  String path = "/" + slug();
+ /* String path = "/" + slug();
   
   FirebaseJson json;
-  FirebaseJsonData jsonObj;
+  FirebaseJsonData jsonObj;*/
   
   Serial.print("Temperature: ");
   Serial.println(sensor.rawTemperature);
@@ -128,7 +134,7 @@ void updateSensor(void)
   Serial.print("CO2 Equivalent: ");
   Serial.println(sensor.co2Equivalent);
 
-  json.set("Temperature", sensor.rawTemperature);
+ /* json.set("Temperature", sensor.rawTemperature);
   json.set("Humidity", sensor.rawHumidity);
   json.set("Pressure", sensor.pressure);
   json.set("BreathVocEquivalent", sensor.breathVocEquivalent);
@@ -142,5 +148,5 @@ void updateSensor(void)
   else
   {
     Serial.println("ERROR: " + firebaseData.errorReason());
-  }
+  }*/
 }
