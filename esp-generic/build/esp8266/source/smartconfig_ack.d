@@ -8,7 +8,7 @@ source/smartconfig_ack.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/newlib/platform_include/sys/time.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/vfs/include/sys/ioctl.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_task.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
@@ -103,7 +103,7 @@ source/smartconfig_ack.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_task.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h:
 

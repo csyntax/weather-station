@@ -16,10 +16,10 @@
 #define __BME680_H__
 
 #include <stdbool.h>
+#include <esp_err.h>
 
 #include "i2cdev.h"
 
-#include <esp_err.h>
 
 #ifdef __cplusplus
 extern "C" {

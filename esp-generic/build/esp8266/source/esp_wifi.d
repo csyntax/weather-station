@@ -1,6 +1,6 @@
 source/esp_wifi.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/source/esp_wifi.c \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_libc.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
@@ -76,7 +76,7 @@ source/esp_wifi.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_wifi_crypto_types.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_aio.h
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_libc.h:
 

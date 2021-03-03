@@ -1,6 +1,6 @@
 src/bootloader_utility.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/src/bootloader_utility.c \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/bootloader/../include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/bootloader/../include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include_priv/bootloader_config.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include/esp_flash_data_types.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include_priv/bootloader_utility.h \
@@ -23,7 +23,7 @@ src/bootloader_utility.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/bootloader/../include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/bootloader/../include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include_priv/bootloader_config.h:
 

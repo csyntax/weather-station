@@ -745,20 +745,20 @@ esp_err_t bme680_get_results_fixed(bme680_t *dev, bme680_values_fixed_t *results
     CHECK_ARG(dev && results);
 
     // fill data structure with invalid values
-    results->temperature = INT16_MIN;
-    results->pressure = 0;
-    results->humidity = 0;
-    results->gas_resistance = 0;
+    //results->temperature = INT16_MIN;
+  //  results->pressure = 0;
+   // results->humidity = 0;
+   // results->gas_resistance = 0;
 
     bme680_raw_data_t raw;
     CHECK(bme680_get_raw_data(dev, &raw));
 
     // use compensation algorithms to compute sensor values in fixed point format
-    if (dev->settings.osr_temperature)
+    //if (dev->settings.osr_temperature)
         results->temperature = bme680_convert_temperature(dev, raw.temperature);
-    if (dev->settings.osr_pressure)
+   // if (dev->settings.osr_pressure)
         results->pressure = bme680_convert_pressure(dev, raw.pressure);
-    if (dev->settings.osr_humidity)
+   // if (dev->settings.osr_humidity)
         results->humidity = bme680_convert_humidity(dev, raw.humidity);
 
     if (dev->settings.heater_profile != BME680_HEATER_NOT_USED)

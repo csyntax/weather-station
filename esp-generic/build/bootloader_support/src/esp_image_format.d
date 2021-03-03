@@ -1,6 +1,6 @@
 src/esp_image_format.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/src/esp_image_format.c \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include/esp_image_format.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include/esp_flash_partitions.h \
@@ -17,7 +17,7 @@ src/esp_image_format.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include_priv/bootloader_random.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include_priv/bootloader_sha.h
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/include/esp_image_format.h:
 

@@ -1,9 +1,14 @@
 #include <stdio.h>
+#include <string.h>
+
+#include <esp_system.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
-#include <esp_system.h>
+
 #include "./bme680.h"
-#include <string.h>
+
+// SDA 4
+// SCL 5
 
 #define SDA_GPIO 4
 #define SCL_GPIO 5
@@ -41,9 +46,14 @@ void bme680_test(void *pvParameters)
     TickType_t last_wakeup = xTaskGetTickCount();
 
     bme680_values_fixed_t values;
+
     while (1)
     {
-        // trigger the sensor to start one TPHG measurement cycle
+        if(bme680_measure_fixed(&sensor, &values) == ESP_OK) {
+            vTaskDelay(duration);
+            printf("Temp=%d, Hum=%d, Press=%d, Gas=%d \n", values.temperature, values.humidity, values.pressure, values.gas_resistance);
+        }
+        /*// trigger the sensor to start one TPHG measurement cycle
         if (bme680_force_measurement(&sensor) == ESP_OK)
         {
             // passive waiting until measurement results are available
@@ -52,7 +62,7 @@ void bme680_test(void *pvParameters)
             // get the results and do something with them
             if (bme680_get_results_fixed(&sensor, &values) == ESP_OK)
                 printf("%d deg \n", values.temperature);
-        }
+        }*/
         // passive waiting until 1 second is over
         vTaskDelayUntil(&last_wakeup, 1000 / portTICK_PERIOD_MS);
     }

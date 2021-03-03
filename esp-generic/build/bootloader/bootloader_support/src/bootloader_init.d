@@ -1,6 +1,6 @@
 src/bootloader_init.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/bootloader_support/src/bootloader_init.c \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/bootloader/../include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/bootloader/../include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/log/include/esp_log.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
@@ -20,7 +20,7 @@ src/bootloader_init.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/pin_mux_register.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/rom_functions.h
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/bootloader/../include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/bootloader/../include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h:
 

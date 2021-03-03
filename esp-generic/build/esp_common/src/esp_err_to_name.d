@@ -4,7 +4,7 @@ src/esp_err_to_name.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_http_client/include/esp_http_client.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/FreeRTOS.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/soc.h \
@@ -94,7 +94,7 @@ src/esp_err_to_name.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h:
 

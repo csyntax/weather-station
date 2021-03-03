@@ -2,7 +2,7 @@ src/crypto/crypto_mbedtls-bignum.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/wpa_supplicant/src/crypto/crypto_mbedtls-bignum.c \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mbedtls/mbedtls/include/mbedtls/bignum.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mbedtls/port/include/mbedtls/esp_config.h \
@@ -43,7 +43,7 @@ src/crypto/crypto_mbedtls-bignum.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h:
 

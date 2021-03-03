@@ -4,7 +4,7 @@ source/esp_fsleep.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/gpio.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/soc.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/pin_mux_register.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
@@ -21,7 +21,7 @@ source/esp_fsleep.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/soc.h:
 

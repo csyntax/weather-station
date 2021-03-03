@@ -8,7 +8,7 @@ library/ssl_stack.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/openssl/include/internal/x509_vfy.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/openssl/include/internal/ssl_dbg.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/openssl/include/platform/ssl_opt.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/openssl/include/platform/ssl_port.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_types.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/log/include/esp_log.h \
@@ -34,7 +34,7 @@ library/ssl_stack.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/openssl/include/platform/ssl_opt.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/openssl/include/platform/ssl_port.h:
 

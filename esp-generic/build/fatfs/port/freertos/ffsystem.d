@@ -2,7 +2,7 @@ port/freertos/ffsystem.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/fatfs/port/freertos/ffsystem.c \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/fatfs/src/ff.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/fatfs/src/ffconf.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/FreeRTOS.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
@@ -38,7 +38,7 @@ port/freertos/ffsystem.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/fatfs/src/ffconf.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/FreeRTOS.h:
 

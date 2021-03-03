@@ -2,7 +2,7 @@ esp-mqtt/lib/mqtt_msg.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/lib/mqtt_msg.c \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/lib/include/mqtt_msg.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/include/mqtt_config.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/include/mqtt_client.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/include/mqtt_config.h \
@@ -96,7 +96,7 @@ esp-mqtt/lib/mqtt_msg.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/include/mqtt_config.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/mqtt/esp-mqtt/include/mqtt_client.h:
 

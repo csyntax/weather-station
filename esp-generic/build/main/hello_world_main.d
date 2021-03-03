@@ -1,8 +1,11 @@
 hello_world_main.o: \
- /mnt/c/Users/csyntax/Desktop/hello_world/main/hello_world_main.c \
+ /mnt/d/GitHub/weather-station/esp-generic/main/hello_world_main.c \
+ /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h \
+ /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
+ /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/FreeRTOS.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/soc.h \
@@ -27,14 +30,11 @@ hello_world_main.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/private/mpu_wrappers.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/heap/include/esp_heap_caps.h \
- /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/heap/port/esp8266/include/esp_heap_config.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/task.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/private/list.h \
- /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h \
- /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/main/./bme680.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/main/./i2cdev.h \
+ /mnt/d/GitHub/weather-station/esp-generic/main/./bme680.h \
+ /mnt/d/GitHub/weather-station/esp-generic/main/./i2cdev.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/i2c.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/FreeRTOS.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/gpio.h \
@@ -43,13 +43,19 @@ hello_world_main.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/gpio_register.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/semphr.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/queue.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/main/./esp_idf_lib_helpers.h
+ /mnt/d/GitHub/weather-station/esp-generic/main/./esp_idf_lib_helpers.h
+
+/home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h:
+
+/home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h:
+
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
+
+/home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/FreeRTOS.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/port/esp8266/include/freertos/FreeRTOSConfig.h:
-
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h:
 
@@ -99,21 +105,15 @@ hello_world_main.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/heap/include/esp_heap_caps.h:
 
-/home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h:
-
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/heap/port/esp8266/include/esp_heap_config.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/task.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/private/list.h:
 
-/home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_system.h:
+/mnt/d/GitHub/weather-station/esp-generic/main/./bme680.h:
 
-/home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_idf_version.h:
-
-/mnt/c/Users/csyntax/Desktop/hello_world/main/./bme680.h:
-
-/mnt/c/Users/csyntax/Desktop/hello_world/main/./i2cdev.h:
+/mnt/d/GitHub/weather-station/esp-generic/main/./i2cdev.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/i2c.h:
 
@@ -131,5 +131,5 @@ hello_world_main.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/queue.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/main/./esp_idf_lib_helpers.h:
-/mnt/c/Users/csyntax/Desktop/hello_world/main/./hello_world_main.c:
+/mnt/d/GitHub/weather-station/esp-generic/main/./esp_idf_lib_helpers.h:
+/mnt/d/GitHub/weather-station/esp-generic/main/./hello_world_main.c:

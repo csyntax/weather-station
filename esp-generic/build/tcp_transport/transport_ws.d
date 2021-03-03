@@ -2,7 +2,7 @@ transport_ws.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/tcp_transport/transport_ws.c \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/newlib/platform_include/sys/random.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/log/include/esp_log.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp8266/eagle_soc.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/driver/soc.h \
@@ -28,7 +28,7 @@ transport_ws.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/log/include/esp_log.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/rom/ets_sys.h:
 

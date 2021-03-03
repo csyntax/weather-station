@@ -1,6 +1,6 @@
 source/startup.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/source/startup.c \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/nvs_flash/include/nvs_flash.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/nvs_flash/include/nvs.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
@@ -83,7 +83,7 @@ source/startup.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/freertos/include/freertos/task.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/newlib/platform_include/esp_newlib.h
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/nvs_flash/include/nvs_flash.h:
 

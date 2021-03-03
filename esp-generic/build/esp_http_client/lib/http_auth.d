@@ -1,7 +1,7 @@
 lib/http_auth.o: \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_http_client/lib/http_auth.c \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/tcpip_adapter/include/esp_netif.h \
- /mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h \
+ /mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_wifi_types.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp_common/include/esp_err.h \
  /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_interface.h \
@@ -90,7 +90,7 @@ lib/http_auth.o: \
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/tcpip_adapter/include/esp_netif.h:
 
-/mnt/c/Users/csyntax/Desktop/hello_world/build/include/sdkconfig.h:
+/mnt/d/GitHub/weather-station/esp-generic/build/include/sdkconfig.h:
 
 /home/ivancivanov/esp/ESP8266_RTOS_SDK/components/esp8266/include/esp_wifi_types.h:
 
