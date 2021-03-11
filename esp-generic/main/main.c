@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <esp_system.h>
@@ -10,8 +11,8 @@
 // SDA 4
 // SCL 5
 
-#define SDA_GPIO 4
-#define SCL_GPIO 5
+#define SDA_GPIO 21
+#define SCL_GPIO 22
 #define PORT 0
 #define ADDR BME680_I2C_ADDR_1
 
@@ -30,7 +31,7 @@ void bme680_test(void *pvParameters)
     bme680_set_oversampling_rates(&sensor, BME680_OSR_4X, BME680_OSR_NONE, BME680_OSR_2X);
 
     // Change the IIR filter size for temperature and pressure to 7.
-    bme680_set_filter_size(&sensor, BME680_IIR_SIZE_0);
+    bme680_set_filter_size(&sensor, BME680_IIR_SIZE_7);
 
     // Change the heater profile 0 to 200 degree Celsius for 100 ms.
     bme680_set_heater_profile(&sensor, 0, 200, 100);
@@ -46,14 +47,15 @@ void bme680_test(void *pvParameters)
     TickType_t last_wakeup = xTaskGetTickCount();
 
     bme680_values_fixed_t values;
-
     while (1)
     {
-        if(bme680_measure_fixed(&sensor, &values) == ESP_OK) {
+        printf()
+        /*if(bme680_measure_fixed(&sensor, &values) == ESP_OK) {
             vTaskDelay(duration);
-            printf("Temp=%d, Hum=%d, Press=%d, Gas=%d \n", values.temperature, values.humidity, values.pressure, values.gas_resistance);
+            //printf("Hello world!\n");
+            //printf("Temp=%d, Hum=%d, Press=%d, Gas=%d \n", values.temperature, values.humidity, values.pressure, values.gas_resistance);
         }
-        /*// trigger the sensor to start one TPHG measurement cycle
+        /*/// trigger the sensor to start one TPHG measurement cycle
         if (bme680_force_measurement(&sensor) == ESP_OK)
         {
             // passive waiting until measurement results are available
@@ -62,8 +64,9 @@ void bme680_test(void *pvParameters)
             // get the results and do something with them
             if (bme680_get_results_fixed(&sensor, &values) == ESP_OK)
                 printf("%d deg \n", values.temperature);
-        }*/
+        }
         // passive waiting until 1 second is over
+
         vTaskDelayUntil(&last_wakeup, 1000 / portTICK_PERIOD_MS);
     }
 }

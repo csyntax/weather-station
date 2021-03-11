@@ -146,6 +146,7 @@ typedef struct
     int8_t   range_sw_err;
 } bme680_calib_data_t;
 
+
 /**
  * BME680 sensor device data structure type
  */
@@ -419,5 +420,6 @@ esp_err_t bme680_set_ambient_temperature(bme680_t *dev, int16_t temperature);
 #endif
 
 /**@}*/
+float calc_temperature(uint16_t temp_adc, bme680_t *dev);
 
 #endif /* __BME680_H__ */

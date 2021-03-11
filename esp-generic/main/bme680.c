@@ -793,6 +793,32 @@ esp_err_t bme680_get_results_float(bme680_t *dev, bme680_values_float_t *results
     return ESP_OK;
 }
 
+float calc_temperature(uint16_t temp_adc, bme680_t *dev)
+{
+	float var1 = 0;
+	float var2 = 0;
+	float calc_temp = 0;
+
+	/* calculate var1 data */
+	var1  = ((((float)temp_adc / 16384.0f) - ((float)dev->calib_data.par_t1 / 1024.0f))
+			* ((float)dev->calib_data.par_t2));
+
+	/* calculate var2 data */
+	var2  = (((((float)temp_adc / 131072.0f) - ((float)dev->calib_data.par_t1 / 8192.0f)) *
+		(((float)temp_adc / 131072.0f) - ((float)dev->calib_data.par_t1 / 8192.0f))) *
+		((float)dev->calib_data.par_t3 * 16.0f));
+
+	/* t_fine value*/
+	dev->calib_data.t_fine = (var1 + var2);
+
+	/* compensated temperature data*/
+	calc_temp  = ((dev->calib_data.t_fine) / 5120.0f);
+
+	//return calc_temp;
+
+    return (float) 0;
+}
+
 esp_err_t bme680_measure_fixed(bme680_t *dev, bme680_values_fixed_t *results)
 {
     CHECK_ARG(dev && results);
