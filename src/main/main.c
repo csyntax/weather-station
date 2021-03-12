@@ -1,24 +1,15 @@
-#include <stdio.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2c.h"
-#include "esp_system.h"
-#include "esp_spi_flash.h"
-#include "esp_log.h"
-#include "nvs_flash.h"
-#include "bme680.h"
-#include "util.h"
-
-#define SDA_PIN 23
-#define SCL_PIN 22
+#include "main.h"
 
 static const char *TAG = "BME680_Station";
 
 static struct bme680_dev sensor;
 static struct bme680_field_data data;
 
-/* setup function for I2C:
- * I2C controller 0, internal pullups enabled, 400kHz
+int delay = 5000 * 1000 * 10; // 50s
+
+/* 
+    * setup function for I2C controller 0
+    * internal pullups enabled, 400kHz
  */
 static esp_err_t i2c_init()
 {
@@ -38,49 +29,54 @@ static esp_err_t i2c_init()
     return i2c_driver_install(port, conf.mode, 0, 0, 0);
 }
 
-void app_main()
+void app_main(void)
 {
     int8_t bme_rslt = BME680_OK;
     uint8_t bme_req_settings;
     uint16_t period;
 
     /* ESP32 initialization */
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-      ESP_ERROR_CHECK(nvs_flash_erase());
-      ret = nvs_flash_init();
-    }
-    ESP_ERROR_CHECK(ret);
+    //esp_err_t ret = nvs_flash_init();
 
-    ESP_LOGI(TAG, "Initializing I2C");
+    //if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+    //    ESP_ERROR_CHECK(nvs_flash_erase());
+    //    ret = nvs_flash_init();
+    //}
+    
+   // ESP_ERROR_CHECK(ret);
+    //ESP_LOGI(TAG, "Initializing I2C");
     ESP_ERROR_CHECK(i2c_init());
 
     /* BME 680 initialization */
-    ESP_LOGI(TAG, "Initializing sensor");
+    //ESP_LOGI(TAG, "Initializing sensor");
+
     sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
     sensor.intf = BME680_I2C_INTF;
     sensor.read = user_i2c_read;
     sensor.write = user_i2c_write;
     sensor.delay_ms = user_delay_ms;
     sensor.amb_temp = 20;
+    
     ESP_ERROR_CHECK((bme_rslt = bme680_init(&sensor)));
+   // ESP_LOGI(TAG, "Configuring sensor");
 
-    ESP_LOGI(TAG, "Configuring sensor");
     sensor.tph_sett.os_hum = BME680_OS_2X;
     sensor.tph_sett.os_pres = BME680_OS_4X;
     sensor.tph_sett.os_temp = BME680_OS_8X;
-    sensor.tph_sett.filter = BME680_FILTER_SIZE_3;
+    sensor.tph_sett.filter = BME680_FILTER_SIZE_7; // Set fiter 7 for hum and temp
     sensor.gas_sett.run_gas = BME680_ENABLE_GAS_MEAS;
     sensor.gas_sett.heatr_temp = 320;
     sensor.gas_sett.heatr_dur = 150;
-    sensor.power_mode = BME680_FORCED_MODE;
+    sensor.power_mode = BME680_FORCED_MODE; // Todo sweep mode
+
     bme_req_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL | BME680_GAS_SENSOR_SEL;
+    
     ESP_ERROR_CHECK((bme_rslt = bme680_set_sensor_settings(bme_req_settings, &sensor)));
     ESP_ERROR_CHECK((bme_rslt = bme680_set_sensor_mode(&sensor)));
 
     /* Main loop */
-    ESP_LOGI(TAG, "Read sensor data");
-    while (1) {
+    //ESP_LOGI(TAG, "Read sensor data");
+    //while (1) {
         /* Wait until measurement is ready */
         bme680_get_profile_dur(&period, &sensor);
         vTaskDelay(pdMS_TO_TICKS(period));
@@ -95,12 +91,16 @@ void app_main()
         }
         printf("\n");
 
+        esp_sleep_enable_timer_wakeup(delay);
+        esp_deep_sleep_start();
+
+
         /* Run measurement once per five seconds */
-        vTaskDelay(pdMS_TO_TICKS(5000-period));
+        //vTaskDelay(pdMS_TO_TICKS(5000-period));
 
         /* Trigger the next measurement  */
-        if (sensor.power_mode == BME680_FORCED_MODE) {
+        /*if (sensor.power_mode == BME680_FORCED_MODE) {
             ESP_ERROR_CHECK((bme_rslt = bme680_set_sensor_mode(&sensor)));
-        }
-    }
+        }*/
+    //}
 }
