@@ -15426,6 +15426,79 @@
                 "id": "component-config-supplicant",
                 "title": "Supplicant",
                 "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Pin Number where the NCS pin of the LoRa module is connected to.",
+                        "id": "CS_GPIO",
+                        "name": "CS_GPIO",
+                        "range": [
+                            0,
+                            35
+                        ],
+                        "title": "CS GPIO",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Pin Number where the NRST pin of the LoRa module is connected to.",
+                        "id": "RST_GPIO",
+                        "name": "RST_GPIO",
+                        "range": [
+                            0,
+                            35
+                        ],
+                        "title": "RST GPIO",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Pin Number to be used as the MISO SPI signal.",
+                        "id": "MISO_GPIO",
+                        "name": "MISO_GPIO",
+                        "range": [
+                            0,
+                            35
+                        ],
+                        "title": "MISO GPIO",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Pin Number to be used as the MOSI SPI signal.",
+                        "id": "MOSI_GPIO",
+                        "name": "MOSI_GPIO",
+                        "range": [
+                            0,
+                            35
+                        ],
+                        "title": "MOSI GPIO",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Pin Number to be used as the SCK SPI signal.",
+                        "id": "SCK_GPIO",
+                        "name": "SCK_GPIO",
+                        "range": [
+                            0,
+                            35
+                        ],
+                        "title": "SCK GPIO",
+                        "type": "int"
+                    }
+                ],
+                "depends_on": null,
+                "id": "component-config-lora-configuration",
+                "title": "LoRa Configuration",
+                "type": "menu"
             }
         ],
         "depends_on": null,

@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHub/weather-station/src/main
+# Install script for directory: C:/Users/csyntax/Desktop/weather-station/src/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

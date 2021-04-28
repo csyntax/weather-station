@@ -1,11 +1,15 @@
 #include "main.h"
 
-static const char *TAG = "BME680_Station";
+#include "esp_log.h"
 
 static struct bme680_dev sensor;
 static struct bme680_field_data data;
 
-int delay = 5000 * 1000 * 10; // 50s
+static int delay = 5000 * 1000 * 2; // 10s
+
+int8_t bme_rslt = BME680_OK;
+uint8_t bme_req_settings;
+uint16_t period;
 
 /* 
     * setup function for I2C controller 0
@@ -29,26 +33,9 @@ static esp_err_t i2c_init()
     return i2c_driver_install(port, conf.mode, 0, 0, 0);
 }
 
-void app_main(void)
+void configure_sensor(void) 
 {
-    int8_t bme_rslt = BME680_OK;
-    uint8_t bme_req_settings;
-    uint16_t period;
-
-    /* ESP32 initialization */
-    //esp_err_t ret = nvs_flash_init();
-
-    //if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-    //    ESP_ERROR_CHECK(nvs_flash_erase());
-    //    ret = nvs_flash_init();
-    //}
-    
-   // ESP_ERROR_CHECK(ret);
-    //ESP_LOGI(TAG, "Initializing I2C");
     ESP_ERROR_CHECK(i2c_init());
-
-    /* BME 680 initialization */
-    //ESP_LOGI(TAG, "Initializing sensor");
 
     sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
     sensor.intf = BME680_I2C_INTF;
@@ -58,7 +45,6 @@ void app_main(void)
     sensor.amb_temp = 20;
     
     ESP_ERROR_CHECK((bme_rslt = bme680_init(&sensor)));
-   // ESP_LOGI(TAG, "Configuring sensor");
 
     sensor.tph_sett.os_hum = BME680_OS_2X;
     sensor.tph_sett.os_pres = BME680_OS_4X;
@@ -73,34 +59,66 @@ void app_main(void)
     
     ESP_ERROR_CHECK((bme_rslt = bme680_set_sensor_settings(bme_req_settings, &sensor)));
     ESP_ERROR_CHECK((bme_rslt = bme680_set_sensor_mode(&sensor)));
-
-    /* Main loop */
-    //ESP_LOGI(TAG, "Read sensor data");
-    //while (1) {
-        /* Wait until measurement is ready */
-        bme680_get_profile_dur(&period, &sensor);
-        vTaskDelay(pdMS_TO_TICKS(period));
-
-        /* Fetch and display measurement results*/
-        ESP_ERROR_CHECK((bme_rslt = bme680_get_sensor_data(&data, &sensor)));
-        printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH ",
-               data.temperature, data.pressure / 100.0f, data.humidity);
-        /* Avoid using measurements from an unstable heating setup */
-        if (data.status & BME680_GASM_VALID_MSK) {
-            printf(", G: %f ohms", data.gas_resistance);
-        }
-        printf("\n");
-
-        esp_sleep_enable_timer_wakeup(delay);
-        esp_deep_sleep_start();
-
-
-        /* Run measurement once per five seconds */
-        //vTaskDelay(pdMS_TO_TICKS(5000-period));
-
-        /* Trigger the next measurement  */
-        /*if (sensor.power_mode == BME680_FORCED_MODE) {
-            ESP_ERROR_CHECK((bme_rslt = bme680_set_sensor_mode(&sensor)));
-        }*/
-    //}
 }
+
+void read_sensor(void) 
+{
+    bme680_get_profile_dur(&period, &sensor);
+    vTaskDelay(pdMS_TO_TICKS(period));
+    
+    ESP_ERROR_CHECK((bme_rslt = bme680_get_sensor_data(&data, &sensor)));
+    
+    printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH ", data.temperature, data.pressure / 100.0f, data.humidity);
+    
+    if (data.status & BME680_GASM_VALID_MSK) {
+        printf(", G: %f ohms", data.gas_resistance);
+    }
+    printf("\n");
+
+    int SIZE = 60;
+
+    char output[SIZE];
+
+    snprintf(output, SIZE, "T: %.2f degC", data.temperature);
+
+    lora_send_packet((uint8_t*) output, SIZE);
+}
+
+void start_lora(void) 
+{
+    lora_init();
+    lora_set_frequency(915e6);
+    lora_enable_crc();
+}
+
+void esp_sleep(void) 
+{
+    esp_sleep_enable_timer_wakeup(delay);
+    esp_deep_sleep_start();
+}
+
+void app_main(void)
+{
+    start_lora();
+    configure_sensor();
+    read_sensor();
+    esp_sleep();
+}
+
+/*
+void task_tx(void *p)
+{
+   for(;;) {
+        printf("packet begin sent...\n");
+        vTaskDelay(pdMS_TO_TICKS(5000));
+        lora_send_packet((uint8_t*) 1, 6);
+        printf("packet sent...\n");
+   }
+}
+
+void app_main()
+{
+   
+   
+   xTaskCreate(&task_tx, "task_tx", 2048, NULL, 5, NULL);
+}*/

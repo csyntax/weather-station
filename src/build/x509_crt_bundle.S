@@ -1,4 +1,4 @@
-/* * Data converted from D:/GitHub/weather-station/src/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from C:/Users/csyntax/Desktop/weather-station/src/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

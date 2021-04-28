@@ -64,4 +64,5 @@ $<TARGET_FILE:__idf_unity>
 $<TARGET_FILE:__idf_wifi_provisioning>
 $<TARGET_FILE:__idf_main>
 $<TARGET_FILE:__idf_BME680_driver>
+$<TARGET_FILE:__idf_esp32-lora-library>
 $<TARGET_FILE:__idf_util>
