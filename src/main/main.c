@@ -15,7 +15,7 @@ uint16_t period;
     * setup function for I2C controller 0
     * internal pullups enabled, 400kHz
  */
-static esp_err_t i2c_init()
+void i2c_init()
 {
     const int port = I2C_NUM_0;
     
@@ -29,13 +29,15 @@ static esp_err_t i2c_init()
     };
     
     i2c_param_config(port, &conf);
-
-    return i2c_driver_install(port, conf.mode, 0, 0, 0);
+    i2c_driver_install(port, conf.mode, 0, 0, 0);
+    //return i2c_driver_install(port, conf.mode, 0, 0, 0);
 }
 
 void configure_sensor(void) 
 {
-    ESP_ERROR_CHECK(i2c_init());
+    //ESP_ERROR_CHECK(i2c_init());
+
+    i2c_init();
 
     sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
     sensor.intf = BME680_I2C_INTF;
