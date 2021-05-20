@@ -1,11 +1,19 @@
+#include <string.h>
+
+#include "esp_system.h"
+#include "soc/gpio_struct.h"
+
+#include "driver/gpio.h"
+#include "driver/spi_master.h"
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "esp_system.h"
-#include "driver/spi_master.h"
-#include "soc/gpio_struct.h"
-#include "driver/gpio.h"
-#include <string.h>
+
+#define CONFIG_CS_GPIO 15
+#define CONFIG_RST_GPIO 32
+#define CONFIG_MISO_GPIO 13
+#define CONFIG_MOSI_GPIO 12
+#define CONFIG_SCK_GPIO 14
 
 /*
  * Register definitions
