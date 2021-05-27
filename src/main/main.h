@@ -10,13 +10,12 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 
-#include <esp_system.h>
-#include <esp_netif.h>
+#include <esp_log.h>
 #include <esp_sleep.h>
+#include <esp_system.h>
 
 #include <esp32/ulp.h>
 #include <soc/rtc.h>
-
 
 #include "util.h"
 #include "bme680.h"

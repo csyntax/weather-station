@@ -1,11 +1,9 @@
 #include "main.h"
 
-#include "esp_log.h"
+struct bme680_dev sensor;
+struct bme680_field_data data;
 
-static struct bme680_dev sensor;
-static struct bme680_field_data data;
-
-static int delay = 5000 * 1000 * 2; // 10s
+uint delay = 5000 * 1000 * 2; // 10s
 
 int8_t bme_rslt = BME680_OK;
 uint8_t bme_req_settings;
@@ -70,20 +68,21 @@ void read_sensor(void)
     
     ESP_ERROR_CHECK((bme_rslt = bme680_get_sensor_data(&data, &sensor)));
     
-    printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH ", data.temperature, data.pressure / 100.0f, data.humidity);
+    printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH", data.temperature, data.pressure / 100.0f, data.humidity);
     
     if (data.status & BME680_GASM_VALID_MSK) {
         printf(", G: %f ohms", data.gas_resistance);
     }
     printf("\n");
 
-    int SIZE = 60;
-
+    int SIZE = 46;
     char output[SIZE];
 
-    snprintf(output, SIZE, "T: %.2f degC", data.temperature);
+    snprintf(output, SIZE, "    T: %.2f degC, P: %.2f hPa, H: %.2f rH", data.temperature,  data.pressure / 100.0f, data.humidity);
 
-    lora_send_packet((uint8_t*) output, SIZE);
+    printf("Begin send packet.\n");
+    lora_send_packet((uint8_t*)(&output), SIZE - 1);
+    printf("Packet success send.\n");
 }
 
 void start_lora(void) 
@@ -106,21 +105,3 @@ void app_main(void)
     read_sensor();
     esp_sleep();
 }
-
-/*
-void task_tx(void *p)
-{
-   for(;;) {
-        printf("packet begin sent...\n");
-        vTaskDelay(pdMS_TO_TICKS(5000));
-        lora_send_packet((uint8_t*) 1, 6);
-        printf("packet sent...\n");
-   }
-}
-
-void app_main()
-{
-   
-   
-   xTaskCreate(&task_tx, "task_tx", 2048, NULL, 5, NULL);
-}*/

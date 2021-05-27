@@ -347,7 +347,7 @@ lora_init(void)
    spi_device_interface_config_t dev = {
       .clock_speed_hz = 9000000,
       .mode = 0,
-      .spics_io_num = -1,
+      .spics_io_num = CONFIG_CS_GPIO,
       .queue_size = 1,
       .flags = 0,
       .pre_cb = NULL
@@ -400,8 +400,11 @@ lora_send_packet(uint8_t *buf, int size)
    lora_idle();
    lora_write_reg(REG_FIFO_ADDR_PTR, 0);
 
-   for(int i=0; i<size; i++) 
-      lora_write_reg(REG_FIFO, *buf++);
+   // TODO
+   for(int i=0; i <= size; i++) {
+      lora_write_reg(REG_FIFO, buf[i]);
+   }
+      
    
    lora_write_reg(REG_PAYLOAD_LENGTH, size);
    
