@@ -1,5 +1,4 @@
 import re
-import time
 import busio
 import board
 from digitalio import DigitalInOut
@@ -31,10 +30,8 @@ def get_data_from_packet(packet):
     
     return (temp, pre, hum)
 
-def send_to_google_firebase(data):
-    pass
-
-while True:
+def listen_for_data():
+    (temp, press, hum) = None
     packet = rfm9x.receive()
 
     if not packet is None:
@@ -44,3 +41,5 @@ while True:
        print(temp)
        print(press)
        print(hum)
+
+    return (temp, press, hum)
