@@ -10,9 +10,7 @@ app = firebase_admin.initialize_app(cert, {
 
 ref = db.reference('/')
 
-def push_to_firebase(data):
-    (temp, press, hum) = data
-    
+def push_to_firebase(temp, press, hum):    
     now = datetime.now().replace(microsecond=0).isoformat()
 
     ref.child(now).set({

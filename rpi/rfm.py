@@ -12,8 +12,6 @@ spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, 915.0)
 rfm9x.tx_power = 17
 
-prev_packet = None
-
 def get_data_from_packet(packet):
     packet = str(packet, 'utf-8')
     packet = packet.split(',')
@@ -31,15 +29,16 @@ def get_data_from_packet(packet):
     return (temp, pre, hum)
 
 def listen_for_data():
-    (temp, press, hum) = None
     packet = rfm9x.receive()
 
+    (temp, pre, hum) = (0, 0, 0)
+    
     if not packet is None:
        (prev_packet, packet) = (packet, None)
-       (temp, press, hum)= get_data_from_packet(prev_packet)
+       (temp, pre, hum)= get_data_from_packet(prev_packet)
        
        print(temp)
-       print(press)
+       print(pre)
        print(hum)
-
-    return (temp, press, hum)
+       
+    return (temp, pre, hum)

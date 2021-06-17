@@ -1,10 +1,8 @@
-from .rfm import listen_for_data
-from .firebase import push_to_firebase
+import rfm
+import firebase
 
-def main():
-    while True:
-        data = listen_for_data()
-        push_to_firebase(data)
-
-if __name__ == "__main__":
-    main()
+while True:
+    (temp, press, hum) = rfm.listen_for_data()
+    
+    if ((not temp) and (not press) and (not hum)) == 0:
+        firebase.push_to_firebase(temp, press, hum)
