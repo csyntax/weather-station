@@ -15,9 +15,10 @@ import * as moment from 'moment';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-    weatherRef!: Observable<any[]>;
-    weatherData: any;
-    displayedColumns: string[] = ['id', 'temp', 'press', 'hum', 'voc', 'co2'];
+    private weatherRef!: Observable<any[]>;
+    private weatherData: any;
+
+    displayedColumns: string[] = ['id', 'temp', 'press', 'hum', /*'voc', 'co2'*/];
 
     constructor(private afDatabase: AngularFireDatabase) {}
 
@@ -33,7 +34,7 @@ export class AppComponent implements AfterViewInit {
                 changes.map(c =>
                     ({
                         key: c.payload.key,
-                        data: c.payload.val()
+                        data: c.payload.val(),
                     })
                 )
             ),
@@ -45,7 +46,9 @@ export class AppComponent implements AfterViewInit {
         });
     }
 
-    private sortByDate(a: any, b: any) {
-        return moment.utc(b.key, 'YYYY-MM-DD-HH-mm-ss').diff(moment.utc(a.key, 'YYYY-MM-DD-HH-mm-ss'));
+    private sortByDate(a: any, b: any) : number {
+        const format = 'YYYY-MM-DD-HH-mm-ss';
+
+        return moment.utc(b.key, format).diff(moment.utc(a.key, format));
     }
 }
