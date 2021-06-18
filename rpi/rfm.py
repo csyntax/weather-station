@@ -10,7 +10,8 @@ CS = DigitalInOut(board.CE1)
 RESET = DigitalInOut(board.D25)
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, 915.0)
-rfm9x.tx_power = 17
+rfm9x.tx_power = 23
+rfm9x.enable_crc = True
 
 def get_data_from_packet(packet):
     packet = str(packet, 'utf-8')
