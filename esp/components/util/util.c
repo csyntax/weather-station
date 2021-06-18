@@ -1,21 +1,7 @@
-/**
- * @file
- * @brief   Definition of system interface functions required by the Bosch BME680 driver code.
- * @author  Markku Kolkka <markku.kolkka@iki.fi>
- * 
- */
-
 #include "util.h"
-#include <stdbool.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/i2c.h"
-#include "sdkconfig.h"
-#include "esp_log.h"
-#include "esp_err.h"
 
-#define ACK_CHECK_EN true                        /*!< I2C master will check ack from slave*/
-#define ACK_CHECK_DIS false                       /*!< I2C master will not check ack from slave */
+#define ACK_CHECK_EN 1                        /*!< I2C master will check ack from slave*/
+#define ACK_CHECK_DIS 0                      /*!< I2C master will not check ack from slave */
 
 static const char *TAG = "I2C utilities";
 
