@@ -15,7 +15,7 @@ uint16_t period;
  */
 void i2c_init()
 {
-    const int port = I2C_NUM_0;
+    const int port = I2C_NUM_0; // TODO
     
     i2c_config_t conf = {
         .mode = I2C_MODE_MASTER,
@@ -36,6 +36,8 @@ void configure_sensor(void)
     //ESP_ERROR_CHECK(i2c_init());
 
     i2c_init();
+   
+    bme680_dev bmeSensor = {}; 
 
     sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
     sensor.intf = BME680_I2C_INTF;
