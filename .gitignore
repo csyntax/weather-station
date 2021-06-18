@@ -7,11 +7,10 @@ node_modules
 .firebase
 chrome-profiler-events*.json
 speed-measure-plugin*.json
-
+__pycache__
 .idea
 .project
 .classpath
-.c9/
 *.launch
 .settings
 *.sublime-workspace
