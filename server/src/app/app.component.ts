@@ -12,19 +12,18 @@ import * as moment from 'moment';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: []
 })
 export class AppComponent implements AfterViewInit {
     private weatherRef!: Observable<any[]>;
     private weatherData: any;
 
+    dataSource: any;
     displayedColumns: string[] = ['id', 'temp', 'press', 'hum', /*'voc', 'co2'*/];
 
-    constructor(private afDatabase: AngularFireDatabase) {}
+    constructor(private readonly afDatabase: AngularFireDatabase) {}
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-    dataSource: any;
 
     ngAfterViewInit(): void {
         this.weatherRef = this.afDatabase.list('/').snapshotChanges();

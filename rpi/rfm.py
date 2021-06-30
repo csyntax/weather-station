@@ -8,8 +8,8 @@ import adafruit_rfm9x
 
 CS = DigitalInOut(board.CE1)
 RESET = DigitalInOut(board.D25)
-spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
-rfm9x = adafruit_rfm9x.RFM9x(spi, CS, RESET, 915.0)
+SPI = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
+rfm9x = adafruit_rfm9x.RFM9x(SPI, CS, RESET, 915.0)
 rfm9x.tx_power = 23
 rfm9x.enable_crc = True
 
@@ -42,4 +42,8 @@ def listen_for_data():
        print(pre)
        print(hum)
        
+       rfm9x.send(bytes("OK", "utf-8"))
+       rssi = rfm9x.last_rssi
+       print("Signal strength: {0} dB".format(rssi))
+    
     return (temp, pre, hum)
