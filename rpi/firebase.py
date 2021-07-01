@@ -3,7 +3,7 @@ from datetime import datetime
 
 from firebase_admin import db, credentials
 
-cert = credentials.Certificate('./cert.json')
+cert = credentials.Certificate('/home/pi/Desktop/cert.json')
 app = firebase_admin.initialize_app(cert, {
     "databaseURL": "https://csyntax-weather-station-default-rtdb.firebaseio.com"
 })
