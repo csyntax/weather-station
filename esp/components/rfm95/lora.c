@@ -49,6 +49,7 @@ lora_read_reg(int reg)
    gpio_set_level(CONFIG_CS_GPIO, 0);
    spi_device_transmit(__spi, &t);
    gpio_set_level(CONFIG_CS_GPIO, 1);
+
    return in[1];
 }
 
@@ -328,11 +329,10 @@ lora_send_packet(uint8_t *buf, int size)
    lora_write_reg(REG_FIFO_ADDR_PTR, 0);
 
    // TODO
-   for(int i=0; i <= size; i++) {
+   for (int i=0; i <= size; i++) {
       lora_write_reg(REG_FIFO, buf[i]);
    }
       
-   
    lora_write_reg(REG_PAYLOAD_LENGTH, size);
    
    /*

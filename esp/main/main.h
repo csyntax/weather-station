@@ -26,3 +26,5 @@
 #define SCL_PIN 22
 
 #define SLEEP_TIME (5000 * 1000 * 2) // 10s
+
+#define PACKET_SIZE 46

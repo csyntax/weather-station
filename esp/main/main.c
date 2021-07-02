@@ -31,7 +31,7 @@ void configure_sensor(void)
     sensor.read = user_i2c_read;
     sensor.write = user_i2c_write;
     sensor.delay_ms = user_delay_ms;
-    sensor.amb_temp = 10;
+    sensor.amb_temp = 22;
     
     if (bme680_init(&sensor) != BME680_OK) 
     {
@@ -43,8 +43,8 @@ void configure_sensor(void)
     sensor.tph_sett.os_temp = BME680_OS_4X;
     sensor.tph_sett.filter = BME680_FILTER_SIZE_7;
     sensor.gas_sett.run_gas = BME680_ENABLE_GAS_MEAS;
-    sensor.gas_sett.heatr_temp = 200;
-    sensor.gas_sett.heatr_dur = 100;
+    sensor.gas_sett.heatr_temp = 300;
+    sensor.gas_sett.heatr_dur = 150;
     sensor.power_mode = BME680_FORCED_MODE;
 
     bme_req_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL | BME680_GAS_SENSOR_SEL;
@@ -70,14 +70,29 @@ void read_sensor(void)
     }
     printf("\n");
 
-    int SIZE = 46;
-    char output[SIZE];
+    char output[PACKET_SIZE];
 
-    snprintf(output, SIZE, "    T: %.2f degC, P: %.2f hPa, H: %.2f rH", data.temperature,  data.pressure / 100.0f, data.humidity);
+    snprintf(output, PACKET_SIZE, "    T: %.2f degC, P: %.2f hPa, H: %.2f rH", data.temperature,  data.pressure / 100.0f, data.humidity);
 
     printf("Begin send packet.\n");
-    lora_send_packet((uint8_t*)(&output), SIZE - 1);
+    lora_send_packet((uint8_t*)(&output), PACKET_SIZE - 1);
     printf("Packet success send.\n");
+    
+  vTaskDelay(10);
+uint8_t buf[32];
+     int x;
+   //for(;;) {
+      lora_receive();    // put into receive mode
+      while(lora_received()) {
+         x = lora_receive_packet(buf, sizeof(buf));
+         buf[x] = 0;
+         printf("Received: %s\n", buf);
+         lora_receive();
+      }
+     
+      vTaskDelay(10);
+   //}
+
     printf("Go sleep.\n");
 }
 
