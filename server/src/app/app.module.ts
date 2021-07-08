@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -12,6 +13,7 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { LocalDatePipe } from './local-date.pipe';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
     imports: [
@@ -22,8 +24,9 @@ import { LocalDatePipe } from './local-date.pipe';
         MatToolbarModule,
         MatPaginatorModule,
         MatButtonModule,
+        MatDialogModule,
     ],
-    declarations: [AppComponent, LocalDatePipe],
+    declarations: [AppComponent, LocalDatePipe, AboutComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

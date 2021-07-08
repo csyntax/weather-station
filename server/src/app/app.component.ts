@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { AboutComponent } from './about/about.component';
 
 @Component({
     selector: 'app-root',
@@ -21,7 +23,7 @@ export class AppComponent implements AfterViewInit {
     dataSource: any;
     displayedColumns: string[] = ['id', 'temp', 'press', 'hum', /*'voc', 'co2'*/];
 
-    constructor(private readonly afDatabase: AngularFireDatabase) {}
+    constructor(private readonly afDatabase: AngularFireDatabase, public dialog: MatDialog) {}
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -42,6 +44,14 @@ export class AppComponent implements AfterViewInit {
             this.weatherData = weather;
             this.dataSource = new MatTableDataSource<any[]>(this.weatherData);
             this.dataSource.paginator = this.paginator;
+        });
+    }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(AboutComponent);
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
         });
     }
 

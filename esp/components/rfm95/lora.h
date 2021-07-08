@@ -1,4 +1,4 @@
-#ifndef __LORA_H__
+.#ifndef __LORA_H__
 #define __LORA_H__
 #include <string.h>
 
