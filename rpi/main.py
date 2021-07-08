@@ -2,7 +2,11 @@ import rfm
 import firebase
 
 while True:
-    (temp, press, hum) = rfm.listen_for_data()
-    
-    if ((not temp) and (not press) and (not hum)) == 0:
-        firebase.push_to_firebase(temp, press, hum)
+    try:
+        data = rfm.listen_for_data()
+
+        firebase.push_to_firebase(data)
+    except(TypeError):
+        pass
+    #if ((not temp) and (not press) and (not hum)) == 0:
+     #   firebase.push_to_firebase(temp, press, hum)

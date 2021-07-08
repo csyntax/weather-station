@@ -10,13 +10,15 @@ app = firebase_admin.initialize_app(cert, {
 
 ref = db.reference('/')
 
-def push_to_firebase(temp, press, hum):    
+def push_to_firebase(data):
+    (temp, pres, hum, gas) = data
     now = datetime.now().replace(microsecond=0).isoformat()
 
     ref.child(now).set({
         'Temperature': temp,
-        'Pressure': press,
+        'Pressure': pres,
         'Humidity': hum,
+        'Gas': gas,
     })
 
     print('Success push to Google Firebase')
