@@ -3,7 +3,7 @@
 #define ACK_CHECK_EN 1                        /*!< I2C master will check ack from slave*/
 #define ACK_CHECK_DIS 0                      /*!< I2C master will not check ack from slave */
 
-static const char *TAG = "I2C utilities";
+char *TAG = "I2C utilities";
 
 /**
  * Wait for a specified number of milliseconds.

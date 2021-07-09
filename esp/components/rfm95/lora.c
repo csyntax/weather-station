@@ -308,9 +308,9 @@ lora_init(void)
    lora_write_reg(REG_FIFO_TX_BASE_ADDR, 0);
    lora_write_reg(REG_LNA, lora_read_reg(REG_LNA) | 0x03);
    lora_write_reg(REG_MODEM_CONFIG_3, 0x04);
-   lora_set_tx_power(23);
 
    lora_idle();
+
    return 1;
 }
 
@@ -320,17 +320,17 @@ lora_init(void)
  * @param size Size of data.
  */
 void 
-lora_send_packet(uint8_t *buf, int size)
+lora_send_packet(char packet[])
 {
+   int size = strlen(packet);
    /*
     * Transfer data to radio.
     */
    lora_idle();
    lora_write_reg(REG_FIFO_ADDR_PTR, 0);
 
-   // TODO
-   for (int i=0; i <= size; i++) {
-      lora_write_reg(REG_FIFO, buf[i]);
+   for (int i=0; i < size; i++) {
+      lora_write_reg(REG_FIFO, (int) packet[i]);
    }
       
    lora_write_reg(REG_PAYLOAD_LENGTH, size);

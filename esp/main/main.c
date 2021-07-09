@@ -1,11 +1,5 @@
 #include "main.h"
 
-struct bme680_dev sensor;
-struct bme680_field_data data;
-
-uint16_t period;
-uint8_t bme_req_settings;
-
 void i2c_init(void)
 {    
     i2c_config_t conf = {
@@ -22,89 +16,62 @@ void i2c_init(void)
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, conf.mode, 0, 0, 0));
 }
 
-void configure_sensor(void) 
+struct bme680_dev bme_init(void)
 {
     i2c_init();
 
-    sensor.dev_id = BME680_I2C_ADDR_SECONDARY;
-    sensor.intf = BME680_I2C_INTF;
-    sensor.read = user_i2c_read;
-    sensor.write = user_i2c_write;
-    sensor.delay_ms = user_delay_ms;
-    sensor.amb_temp = 22;
-    
-    if (bme680_init(&sensor) != BME680_OK) 
-    {
-        return;
-    }
+    struct bme680_dev sensor = {
+        .dev_id = 0x77,
+        .intf = BME680_I2C_INTF,
+        .read = user_i2c_read,
+        .write = user_i2c_write,
+        .delay_ms = user_delay_ms,
+        .amb_temp = 23,
+        .tph_sett.os_hum = BME680_OS_2X,
+        .tph_sett.os_pres = BME680_OS_4X,
+        .tph_sett.os_temp = BME680_OS_4X,
+        .tph_sett.filter = BME680_FILTER_SIZE_7,
+        .gas_sett.run_gas = BME680_ENABLE_GAS_MEAS,
+        .gas_sett.heatr_temp = 300,
+        .gas_sett.heatr_dur = 150,
+        .power_mode = BME680_FORCED_MODE,
+    };
 
-    sensor.tph_sett.os_hum = BME680_OS_2X;
-    sensor.tph_sett.os_pres = BME680_OS_4X;
-    sensor.tph_sett.os_temp = BME680_OS_4X;
-    sensor.tph_sett.filter = BME680_FILTER_SIZE_7;
-    sensor.gas_sett.run_gas = BME680_ENABLE_GAS_MEAS;
-    sensor.gas_sett.heatr_temp = 300;
-    sensor.gas_sett.heatr_dur = 150;
-    sensor.power_mode = BME680_FORCED_MODE;
+    bme680_init(&sensor);
 
-    bme_req_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL | BME680_GAS_SENSOR_SEL;
-    
+    uint8_t bme_req_settings = BME680_OST_SEL | BME680_OSP_SEL | BME680_OSH_SEL | BME680_FILTER_SEL | BME680_GAS_SENSOR_SEL;
+
     bme680_set_sensor_settings(bme_req_settings, &sensor);
     bme680_set_sensor_mode(&sensor);
+
+    return sensor;
 }
 
-void read_sensor(void) 
+
+ struct bme680_field_data bme_read_sensor(struct bme680_dev sensor) 
 {
+    uint16_t period;
+    struct bme680_field_data data;
+
     bme680_get_profile_dur(&period, &sensor);
-    vTaskDelay(pdMS_TO_TICKS(period));
+    user_delay_ms(period);
     
-    if (bme680_get_sensor_data(&data, &sensor) != BME680_OK) 
-    {
-        return;
-    }  
+    bme680_get_sensor_data(&data, &sensor);
 
-    printf("T: %.2f degC, P: %.2f hPa, H: %.2f %%rH", data.temperature, data.pressure / 100.0f, data.humidity);
-    
-    if (data.status & BME680_GASM_VALID_MSK) {
-        printf(", G: %f ohms", data.gas_resistance);
-    }
-    printf("\n");
-
-    char output[PACKET_SIZE];
-
-    snprintf(output, PACKET_SIZE, "    T: %.2f degC, P: %.2f hPa, H: %.2f rH", data.temperature,  data.pressure / 100.0f, data.humidity);
-
-    printf("Begin send packet.\n");
-    lora_send_packet((uint8_t*)(&output), PACKET_SIZE - 1);
-    printf("Packet success send.\n");
-    
-  vTaskDelay(10);
-uint8_t buf[32];
-     int x;
-   //for(;;) {
-      lora_receive();    // put into receive mode
-      while(lora_received()) {
-         x = lora_receive_packet(buf, sizeof(buf));
-         buf[x] = 0;
-         printf("Received: %s\n", buf);
-         lora_receive();
-      }
-     
-      vTaskDelay(10);
-   //}
-
-    printf("Go sleep.\n");
+    return data;
 }
 
 void start_lora(void) 
 {
     lora_init();
-    lora_set_frequency(915e6);
+    lora_set_frequency(868e6);
+    lora_set_tx_power(17);
     lora_enable_crc();
 }
 
 void esp_sleep(void) 
 {
+    printf("Go sleep.\n");
     esp_sleep_enable_timer_wakeup(SLEEP_TIME);
     esp_deep_sleep_start();
 }
@@ -112,7 +79,22 @@ void esp_sleep(void)
 void app_main(void)
 {
     start_lora();
-    configure_sensor();
-    read_sensor();
+
+    struct bme680_dev sensor = bme_init();
+    struct bme680_field_data data = bme_read_sensor(sensor);
+
+    printf("Temperature: %.2f*C\n", data.temperature);
+    printf("Pressure: %.2f hPa\n", data.pressure / 100.0f);
+    printf("Humidity: %.2f %%\n", data.humidity); 
+    printf("Gas Resistance: %.2f Omh\n", data.gas_resistance);
+    
+    char packet[65];
+
+    snprintf(packet, 65,"    T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
+
+    printf("Begin send package via LoRa.\n");
+    lora_send_packet(packet);
+    printf("Success send package via LoRa.\n");
+
     esp_sleep();
 }

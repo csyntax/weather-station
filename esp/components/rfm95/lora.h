@@ -1,4 +1,4 @@
-.#ifndef __LORA_H__
+#ifndef __LORA_H__
 #define __LORA_H__
 #include <string.h>
 
@@ -92,7 +92,7 @@ void lora_set_sync_word(int sw);
 void lora_enable_crc(void);
 void lora_disable_crc(void);
 int lora_init(void);
-void lora_send_packet(uint8_t *buf, int size);
+void lora_send_packet(char buf[]);
 int lora_receive_packet(uint8_t *buf, int size);
 int lora_received(void);
 int lora_packet_rssi(void);

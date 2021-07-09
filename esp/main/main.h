@@ -27,4 +27,4 @@
 
 #define SLEEP_TIME (5000 * 1000 * 2) // 10s
 
-#define PACKET_SIZE 46
+#define PACKET_SIZE 60
