@@ -1,0 +1,10 @@
+import rfm
+import firebase
+
+while True:
+    try:
+        rfm.listen_for_data()
+
+        firebase.push_to_firebase(data)
+    except(TypeError):
+        pass

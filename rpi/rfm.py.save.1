@@ -34,16 +34,22 @@ def get_data_from_packet(packet):
     return (temp, pre, hum, gas)
 
 def listen_for_data():
-    packet = rfm9x.receive()
+    #packet = rfm9x.receive()
 
-    if not packet is None:
-       (temp, pre, hum, gas) = get_data_from_packet(packet)
+    #if not packet is None:
+     #  (temp, pre, hum, gas)= get_data_from_packet(packet)
 
-       rssi = rfm9x.last_rssi
+      # print(temp)
+      # print(pre)
+      # print(hum)
 
-       display.lcd_display_string("Signal: {0} dB".format(rssi), 1)
+      # print(gas)
+    rfm9x.send(bytes("    OK", "utf-8"))
 
-       return (temp, pre, hum, gas)
-    else:
-       return None
+       #rssi = rfm9x.last_rssi
 
+       #display.lcd_display_string("Signal: {0} dB".format(rssi), 1)
+
+      # return (temp, pre, hum, gas)
+    #else:
+     #  return None
