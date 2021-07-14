@@ -1,0 +1,11 @@
+[Unit]
+Description=Weather Service
+After=multi-user.target
+
+[Service]
+Type=simple
+StandardInput=tty-force
+ExecStart=/usr/bin/python3 /home/pi/Desktop/weather-station/rpi/main.py
+
+[Install]
+WantedBy=multi-user.target

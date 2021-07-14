@@ -45,3 +45,4 @@ def listen_for_data(display):
        return (temp, pre, hum, gas)
     else:
        return None
+

@@ -1,7 +1,8 @@
+#!/usr/bin/python3
+
 import lcd
 import rfm
 import firebase
-
 from datetime import datetime
 
 display = lcd.lcd()
