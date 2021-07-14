@@ -1,18 +1,14 @@
-import firebase_admin
-from datetime import datetime
+from firebase_admin import initialize_app, db, credentials
 
-from firebase_admin import db, credentials
-
-cert = credentials.Certificate('/home/pi/Desktop/cert.json')
-app = firebase_admin.initialize_app(cert, {
+CERT = credentials.Certificate('/home/pi/Desktop/cert.json')
+app = initialize_app(CERT, {
     "databaseURL": "https://csyntax-weather-station-default-rtdb.firebaseio.com"
 })
 
 ref = db.reference('/')
 
-def push_to_firebase(data):
+def push_to_firebase(now, data):
     (temp, pres, hum, gas) = data
-    now = datetime.now().replace(microsecond=0).isoformat()
 
     ref.child(now).set({
         'Temperature': temp,

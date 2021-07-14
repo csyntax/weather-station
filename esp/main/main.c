@@ -1,7 +1,7 @@
 #include "main.h"
 
 void i2c_init(void)
-{    
+{
     i2c_config_t conf = {
         .mode = I2C_MODE_MASTER,
         .sda_io_num = SDA_PIN,
@@ -12,8 +12,7 @@ void i2c_init(void)
     };
     
     i2c_param_config(I2C_NUM_0, &conf);
-
-    ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, conf.mode, 0, 0, 0));
+    i2c_driver_install(I2C_NUM_0, conf.mode, 0, 0, 0);
 }
 
 struct bme680_dev bme_init(void)
@@ -72,6 +71,7 @@ void start_lora(void)
 void esp_sleep(void) 
 {
     printf("Go sleep.\n");
+    lora_sleep();
     esp_sleep_enable_timer_wakeup(SLEEP_TIME);
     esp_deep_sleep_start();
 }
@@ -88,13 +88,11 @@ void app_main(void)
     printf("Humidity: %.2f %%\n", data.humidity); 
     printf("Gas Resistance: %.2f Omh\n", data.gas_resistance);
     
-    char packet[65];
-
-    snprintf(packet, 65,"    T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
+    char packet[PACKET_SIZE];
+    snprintf(packet, PACKET_SIZE,"    T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
 
     printf("Begin send package via LoRa.\n");
     lora_send_packet(packet);
     printf("Success send package via LoRa.\n");
-
     esp_sleep();
 }

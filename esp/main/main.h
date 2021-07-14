@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <time.h>
 
 #include <sys/time.h>
 
@@ -15,16 +14,13 @@
 #include <esp_system.h>
 
 #include <esp32/ulp.h>
-//#include <soc/rtc.h>
 
 #include "lora.h"
-
 #include "util.h"
 #include "bme680.h"
 
 #define SDA_PIN 23
 #define SCL_PIN 22
 
-#define SLEEP_TIME (5000 * 1000 * 2) // 10s
-
-#define PACKET_SIZE 60
+#define SLEEP_TIME 2e7 // 20s
+#define PACKET_SIZE 65

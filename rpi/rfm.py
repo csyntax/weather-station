@@ -3,7 +3,6 @@ import busio
 import board
 from digitalio import DigitalInOut
 
-import lcd
 import adafruit_ssd1306
 import adafruit_rfm9x
 
@@ -14,8 +13,6 @@ SPI = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm9x = adafruit_rfm9x.RFM9x(SPI, CS, RESET, 868.0)
 rfm9x.tx_power = 17
 rfm9x.enable_crc = True
-
-display = lcd.lcd()
 
 def get_data_from_packet(packet):
     packet = str(packet, 'utf-8')
@@ -33,22 +30,17 @@ def get_data_from_packet(packet):
 
     return (temp, pre, hum, gas)
 
-def listen_for_data():
+def listen_for_data(display):
     packet = rfm9x.receive()
 
     if not packet is None:
        (temp, pre, hum, gas)= get_data_from_packet(packet)
-
-       print(temp)
-       print(pre)
-       print(hum)
-       print(gas)
-
-       #rfm9x.send(bytes("OK", "utf-8"))
-
+       
        rssi = rfm9x.last_rssi
-
-       display.lcd_display_string("Signal: {0} dB".format(rssi), 1)
+       
+       display.lcd_clear()
+       display.lcd_display_string('Recived data', 1)
+       display.lcd_display_string('Signal: {0} dB'.format(rssi), 2)
 
        return (temp, pre, hum, gas)
     else:
