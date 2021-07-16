@@ -41,7 +41,7 @@ def listen_for_data(display):
        display.lcd_clear()
        display.lcd_display_string('Recived data', 1)
        display.lcd_display_string('Signal: {0} dB'.format(rssi), 2)
-
+       display.lcd_clear()
        return (temp, pre, hum, gas)
     else:
        return None
