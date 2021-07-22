@@ -89,7 +89,7 @@ void app_main(void)
     printf("Gas Resistance: %.2f Omh\n", data.gas_resistance);
     
     char packet[PACKET_SIZE];
-    snprintf(packet, PACKET_SIZE,"    T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
+    snprintf(packet, PACKET_SIZE,"T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
 
     printf("Begin send package via LoRa.\n");
     lora_send_packet(packet);
