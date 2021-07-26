@@ -94,7 +94,7 @@ void app_main(void)
     print_sensor_data(data);
     
     char packet[PACKET_SIZE];
-    snprintf(packet, PACKET_SIZE,"    T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
+    snprintf(packet, PACKET_SIZE,"T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
 
     sensor.power_mode = BME680_SLEEP_MODE;
     bme680_set_sensor_mode(&sensor);
