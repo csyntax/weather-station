@@ -47,7 +47,7 @@ struct bme680_dev bme_init(void)
 }
 
 
- struct bme680_field_data bme_read_sensor(struct bme680_dev sensor) 
+struct bme680_field_data bme_read_sensor(struct bme680_dev sensor) 
 {
     uint16_t period;
     struct bme680_field_data data;
@@ -58,6 +58,14 @@ struct bme680_dev bme_init(void)
     bme680_get_sensor_data(&data, &sensor);
 
     return data;
+}
+
+void print_sensor_data(struct bme680_field_data data)
+{
+    printf("Temperature: %.2f*C\n", data.temperature);
+    printf("Pressure: %.2f hPa\n", data.pressure / 100.0f);
+    printf("Humidity: %.2f %%\n", data.humidity); 
+    printf("Gas Resistance: %.2f Omh\n", data.gas_resistance);
 }
 
 void start_lora(void) 
@@ -83,16 +91,17 @@ void app_main(void)
     struct bme680_dev sensor = bme_init();
     struct bme680_field_data data = bme_read_sensor(sensor);
 
-    printf("Temperature: %.2f*C\n", data.temperature);
-    printf("Pressure: %.2f hPa\n", data.pressure / 100.0f);
-    printf("Humidity: %.2f %%\n", data.humidity); 
-    printf("Gas Resistance: %.2f Omh\n", data.gas_resistance);
+    print_sensor_data(data);
     
     char packet[PACKET_SIZE];
     snprintf(packet, PACKET_SIZE,"    T: %.2f degC, P: %.2f hPa, H: %.2f rH, G: %.2f Omh", data.temperature,  data.pressure / 100.0f, data.humidity, data.gas_resistance);
 
+    sensor.power_mode = BME680_SLEEP_MODE;
+    bme680_set_sensor_mode(&sensor);
+
     printf("Begin send package via LoRa.\n");
     lora_send_packet(packet);
     printf("Success send package via LoRa.\n");
+
     esp_sleep();
 }

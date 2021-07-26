@@ -2,6 +2,7 @@ import re
 import busio
 import board
 from digitalio import DigitalInOut
+from time import sleep
 
 import adafruit_ssd1306
 import adafruit_rfm9x
@@ -41,6 +42,7 @@ def listen_for_data(display):
        display.lcd_clear()
        display.lcd_display_string('Recived data', 1)
        display.lcd_display_string('Signal: {0} dB'.format(rssi), 2)
+       sleep(3)
        display.lcd_clear()
        return (temp, pre, hum, gas)
     else:

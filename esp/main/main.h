@@ -13,7 +13,12 @@
 #include <esp_sleep.h>
 #include <esp_system.h>
 
-#include <esp32/ulp.h>
+//#include <esp32/ulp.h>
+
+#include "esp_timer.h"
+#include "esp_log.h"
+#include "esp_sleep.h"
+#include "sdkconfig.h"
 
 #include "lora.h"
 #include "util.h"
