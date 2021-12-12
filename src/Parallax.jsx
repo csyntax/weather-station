@@ -2,7 +2,91 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Animated from 'animated/lib/targets/react-dom'
 
-export default class Parallax extends React.Component {
+export class Layer extends React.Component {
+    static contextTypes = { parallax: PropTypes.object }
+    static propTypes = {
+        factor: PropTypes.number,
+        offset: PropTypes.number,
+        speed: PropTypes.number,
+    }
+    static defaultProps = {
+        factor: 1,
+        offset: 0,
+        speed: 0,
+    }
+
+    constructor(props, context) {
+        super(props, context)
+        const parallax = this.context.parallax
+        const targetScroll = Math.floor(props.offset) * parallax.space
+        const offset = parallax.space * props.offset + targetScroll * props.speed
+        const toValue = parseFloat(-(parallax.current * props.speed) + offset)
+        this.animatedTranslate = new Animated.Value(toValue)
+        this.animatedSpace = new Animated.Value(parallax.space * props.factor)
+    }
+
+    componentDidMount() {
+        const parent = this.context.parallax
+        if (parent) {
+            parent.layers = parent.layers.concat(this)
+            parent.update()
+        }
+    }
+
+    componentWillUnmount() {
+        const parent = this.context.parallax
+        if (parent) {
+            parent.layers = parent.layers.filter(layer => layer !== this)
+            parent.update()
+        }
+    }
+
+    setPosition(height, scrollTop, immediate = false) {
+        const targetScroll = Math.floor(this.props.offset) * height
+        const offset = height * this.props.offset + targetScroll * this.props.speed
+        const toValue = parseFloat(-(scrollTop * this.props.speed) + offset)
+        if (!immediate) this.context.parallax.props.effect(this.animatedTranslate, toValue).start()
+        else this.animatedTranslate.setValue(toValue)
+    }
+
+    setHeight(height, immediate = false) {
+        const toValue = parseFloat(height * this.props.factor)
+        if (!immediate) this.context.parallax.props.effect(this.animatedSpace, toValue).start()
+        else this.animatedSpace.setValue(toValue)
+    }
+
+    render() {
+        const { style, children, offset, speed, factor, className, ...props } = this.props
+        const horizontal = this.context.parallax.props.horizontal
+        const translate3d = this.animatedTranslate.interpolate({
+            inputRange: [0, 1],
+            outputRange: horizontal ? ['0px,0,0', '1px,0,0'] : ['0,0px,0', '0,1px,0'],
+        })
+
+        return (
+            <Animated.div
+                {...props}
+                ref="layer"
+                className={className}
+                style={{
+                    position: 'absolute',
+                    backgroundSize: 'auto',
+                    backgroundRepeat: 'no-repeat',
+                    willChange: 'transform',
+                    [horizontal ? 'height' : 'width']: '100%',
+                    [horizontal ? 'width' : 'height']: this.animatedSpace,
+                    WebkitTransform: [{ translate3d }],
+                    MsTransform: [{ translate3d }],
+                    transform: [{ translate3d }],
+                    ...style,
+                }}>
+                {children}
+            </Animated.div>
+        )
+    }
+}
+
+export class Parallax extends React.Component {
     static propTypes = {
         pages: PropTypes.number.isRequired,
         effect: PropTypes.func,
@@ -37,7 +121,7 @@ export default class Parallax extends React.Component {
         this.busy = false
     }
 
-    scrollerRaf = () => requestAnimationFrame(this.moveItems)
+    scrollerRaf = () => window.requestAnimationFrame(this.moveItems)
 
     onScroll = event => {
         const { horizontal } = this.props
@@ -53,7 +137,7 @@ export default class Parallax extends React.Component {
         if (!this.containerRef.current) return
         this.space = this.containerRef.current[horizontal ? 'clientWidth' : 'clientHeight']
         if (scrolling) this.current = this.containerRef.current[horizontal ? 'scrollLeft' : 'scrollTop']
-        else this.containerRef[horizontal ? 'scrollLeft' : 'scrollTop'] = this.current = this.offset * this.space
+        else this.containerRef.current[horizontal ? 'scrollLeft' : 'scrollTop'] = this.current = this.offset * this.space
         if (this.contentRef.current)
             this.contentRef.current.style[horizontal ? 'width' : 'height'] = `${this.space * this.props.pages}px`
         this.layers.forEach(layer => {
@@ -139,89 +223,5 @@ export default class Parallax extends React.Component {
                 )}
             </div>
         )
-    }
-
-    static Layer = class extends React.Component {
-        static contextTypes = { parallax: PropTypes.object }
-        static propTypes = {
-            factor: PropTypes.number,
-            offset: PropTypes.number,
-            speed: PropTypes.number,
-        }
-        static defaultProps = {
-            factor: 1,
-            offset: 0,
-            speed: 0,
-        }
-
-        constructor(props, context) {
-            super(props, context)
-            const parallax = context.parallax
-            const targetScroll = Math.floor(props.offset) * parallax.space
-            const offset = parallax.space * props.offset + targetScroll * props.speed
-            const toValue = parseFloat(-(parallax.current * props.speed) + offset)
-            this.animatedTranslate = new Animated.Value(toValue)
-            this.animatedSpace = new Animated.Value(parallax.space * props.factor)
-        }
-
-        componentDidMount() {
-            const parent = this.context.parallax
-            if (parent) {
-                parent.layers = parent.layers.concat(this)
-                parent.update()
-            }
-        }
-
-        componentWillUnmount() {
-            const parent = this.context.parallax
-            if (parent) {
-                parent.layers = parent.layers.filter(layer => layer !== this)
-                parent.update()
-            }
-        }
-
-        setPosition(height, scrollTop, immediate = false) {
-            const targetScroll = Math.floor(this.props.offset) * height
-            const offset = height * this.props.offset + targetScroll * this.props.speed
-            const toValue = parseFloat(-(scrollTop * this.props.speed) + offset)
-            if (!immediate) this.context.parallax.props.effect(this.animatedTranslate, toValue).start()
-            else this.animatedTranslate.setValue(toValue)
-        }
-
-        setHeight(height, immediate = false) {
-            const toValue = parseFloat(height * this.props.factor)
-            if (!immediate) this.context.parallax.props.effect(this.animatedSpace, toValue).start()
-            else this.animatedSpace.setValue(toValue)
-        }
-
-        render() {
-            const { style, children, offset, speed, factor, className, ...props } = this.props
-            const horizontal = this.context.parallax.props.horizontal
-            const translate3d = this.animatedTranslate.interpolate({
-                inputRange: [0, 1],
-                outputRange: horizontal ? ['0px,0,0', '1px,0,0'] : ['0,0px,0', '0,1px,0'],
-            })
-
-            return (
-                <Animated.div
-                    {...props}
-                    ref="layer"
-                    className={className}
-                    style={{
-                        position: 'absolute',
-                        backgroundSize: 'auto',
-                        backgroundRepeat: 'no-repeat',
-                        willChange: 'transform',
-                        [horizontal ? 'height' : 'width']: '100%',
-                        [horizontal ? 'width' : 'height']: this.animatedSpace,
-                        WebkitTransform: [{ translate3d }],
-                        MsTransform: [{ translate3d }],
-                        transform: [{ translate3d }],
-                        ...style,
-                    }}>
-                    {children}
-                </Animated.div>
-            )
-        }
     }
 }
