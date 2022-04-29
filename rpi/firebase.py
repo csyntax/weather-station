@@ -1,8 +1,8 @@
 from firebase_admin import initialize_app, db, credentials
 
-cert = credentials.Certificate('/home/pi/Desktop/cert.json')
+cert = credentials.Certificate('<CERT_FILE>')
 app = initialize_app(cert, {
-    "databaseURL": 'https://csyntax-weather-station-default-rtdb.firebaseio.com'
+    "databaseURL": '<DATABASE_URL>'
 })
 ref = db.reference('/')
 
